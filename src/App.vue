@@ -1,11 +1,11 @@
 <script setup lang="ts">
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import HelloWorld from './components/HelloWorld.vue'
+// import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
-  <div>
+  <!-- <div>
     <a href="https://vitejs.dev" target="_blank">
       <img src="/vite.svg" class="logo" alt="Vite logo" />
     </a>
@@ -14,7 +14,8 @@ import HelloWorld from './components/HelloWorld.vue'
     </a>
   </div>
   <HelloWorld msg="Vite + Vue" />
-  <el-button type="primary">Primary</el-button>
+  <el-button type="primary">Primary</el-button> -->
+  <router-view />
 </template>
 
 <style scoped>
