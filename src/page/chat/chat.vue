@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import mainLayout from '../../components/mainLayout.vue'
 import chatBar from './chatBar.vue'
-import chatMainVue from './chatMain.vue'
 </script>
 
 <template>
@@ -11,7 +10,7 @@ import chatMainVue from './chatMain.vue'
         <chatBar></chatBar>
       </template>
       <template v-slot:right>
-        <chatMainVue></chatMainVue>
+        <router-view></router-view>
       </template>
     </mainLayout>
   </div>

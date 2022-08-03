@@ -13,6 +13,7 @@
   height: 55px;
   display: flex;
   align-items: center;
+  border-bottom: 1px solid #ccc;
 }
 .name {
   flex: 1;
