@@ -1,7 +1,10 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Chat from '../page/chat/chat.vue'
 import chatMain from '@/page/chat/chatMain.vue'
-const routes: RouteRecordRaw[] = [
+import Friends from '../page/friends/friends.vue'
+import Collection from '../page/collection/collection.vue'
+export const routes: RouteRecordRaw[] = [
+  { path: '/', redirect: '/chat' },
   {
     path: '/chat',
     component: Chat,
@@ -12,7 +15,15 @@ const routes: RouteRecordRaw[] = [
       }
     ]
   },
-  { path: '/', redirect: '/chat' }
+
+  {
+    path: '/friends',
+    component: Friends
+  },
+  {
+    path: '/collection',
+    component: Collection
+  }
 ]
 
 const router = createRouter({

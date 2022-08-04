@@ -9,6 +9,9 @@
 <script setup lang="ts">
 import titleVue from '@/components/title.vue'
 import inputBoxVue from '@/components/inputBox.vue'
+import { useRoute } from 'vue-router'
+const route = useRoute()
+console.log(route.params)
 </script>
 <style scoped>
 .chatContent {
