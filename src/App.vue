@@ -9,7 +9,8 @@ import LayOut from '@/page/layout/layout.vue'
   <!-- <router-view /> -->
 
   <div class="container">
-    <LayOut></LayOut>
+    <RouterView></RouterView>
+    <!-- <LayOut></LayOut> -->
   </div>
 </template>
 

@@ -51,7 +51,7 @@ import { reactive, ref, toRefs } from 'vue'
 import axios from 'axios'
 import { h } from 'vue'
 import { ElMessage } from 'element-plus'
-import router from '../router/router'
+import router from '../../router/router'
 import { url } from 'inspector'
 import { method } from 'lodash'
 export default {
@@ -82,6 +82,8 @@ export default {
         // })
         .then(function (response) {
           if (response.data.msg == 'success') {
+            console.log(response.data)
+            localStorage.setItem('user', response.data.data)
             let path = '/chat'
             router.push({ path: path })
             return
@@ -103,8 +105,8 @@ export default {
 
 <style scoped>
 /* <style> */
-.login * + *{
-  margin-top:0 ;
+.login >>> * {
+  margin-top: 0;
 }
 .login {
   position: absolute;
@@ -116,7 +118,6 @@ export default {
   background-size: 100% 100%;
   background-color: darkslategrey;
   font-size: medium;
-
 }
 .login-body {
   /* padding: 20px; */
