@@ -6,7 +6,7 @@ import LayOut from '@/page/layout/layout.vue'
 </script>
 
 <template>
-  <router-view />
+  <!-- <router-view /> -->
 
   <div class="container">
     <LayOut></LayOut>
