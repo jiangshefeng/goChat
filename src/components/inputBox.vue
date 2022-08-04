@@ -1,6 +1,9 @@
 <template>
   <div class="container">
     <textarea></textarea>
+    <div class="send">
+      <el-button type="success">发送 </el-button>
+    </div>
   </div>
 </template>
 
@@ -29,5 +32,14 @@ textarea {
 }
 textarea:focus-visible {
   outline: none;
+}
+.send {
+  position: relative;
+  margin-top: 0;
+}
+.send >>> .el-button {
+  position: absolute;
+  width: 100px;
+  right: 0;
 }
 </style>

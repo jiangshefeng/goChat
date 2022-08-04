@@ -45,7 +45,9 @@ const goRouter = (item: any) => {
           @click="() => goRouter(item)"
         >
           <svg
-            :class="item.path === route.fullPath ? 'selected icon' : 'icon'"
+            :class="
+              route.fullPath.includes(item.path) ? 'selected icon' : 'icon'
+            "
             aria-hidden="true"
           >
             <use :xlink:href="`#icon-${item.icon}`"></use>
