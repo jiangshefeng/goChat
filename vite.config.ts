@@ -20,11 +20,13 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src')
-    }
+    },
+    extensions: ['.js', '.jsx', '.ts']
   },
   server: {
     port: 8000,
     open: true,
-    proxy: {}
+    proxy: {},
+    hmr: true
   }
 })

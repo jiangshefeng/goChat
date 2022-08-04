@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import Chat from '../page/chat/chat.vue'
 import Home from '@/views/Home.vue'
 const routes: RouteRecordRaw[] = [
   // {
@@ -12,11 +13,15 @@ const routes: RouteRecordRaw[] = [
     path: "/Home",
     name: "Home",
     component: Home,
+  },{
+    path: '/chat',
+    component: Chat
   },
   {
     path: "/",
     component: () => import("../views/Login.vue"),
   },
+
 
 ]
 

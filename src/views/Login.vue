@@ -18,6 +18,7 @@
           ><el-input
             v-model="password"
             type="password"
+            @keyup.enter="submit"
             placeholder="密码"
             show-password
           />
@@ -55,10 +56,6 @@ import { url } from 'inspector'
 import { method } from 'lodash'
 export default {
   setup() {
-    // const user={
-    //   account: ref(''),
-    //   password: ref(''),
-    // }
     const user = reactive({
       account: '',
       password: ''
@@ -85,8 +82,8 @@ export default {
         // })
         .then(function (response) {
           if (response.data.msg == 'success') {
-            let queryRedirectPath = '/Home'
-            router.push({ path: queryRedirectPath })
+            let path = '/chat'
+            router.push({ path: path })
             return
           } else {
             ElMessage.error(response.data.msg)
@@ -104,7 +101,11 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+/* <style> */
+.login * + *{
+  margin-top:0 ;
+}
 .login {
   position: absolute;
   left: 0;
@@ -114,6 +115,8 @@ export default {
   background-image: url(/src/assets/login-bg.jpg);
   background-size: 100% 100%;
   background-color: darkslategrey;
+  font-size: medium;
+
 }
 .login-body {
   /* padding: 20px; */
