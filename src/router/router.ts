@@ -8,23 +8,37 @@ import chatMain from '@/page/chat/chatMain.vue'
 import Friends from '../page/friends/friends.vue'
 import friendsMain from '@/page/friends/friendsMain.vue'
 import Collection from '../page/collection/collection.vue'
+import LayOut from '@/page/layout/layout.vue'
+import Login from '../page/login/Login.vue'
 export const routes: RouteRecordRaw[] = [
-  { path: '/', redirect: '/login' },
+  { path: '/', redirect: '/login', component:Login},
+  
   {
-    path: "/login",
-    component: () => import("../views/Login.vue"),
-  },
-  {
-    path: '/chat',
-    component: Chat,
+    path: '/',
+    component: LayOut,
+    redirect: '/chat',
     children: [
       {
-        path: ':id',
-        component: chatMain
+        path: '/chat',
+        component: Chat,
+        children: [
+          {
+            path: ':id',
+            component: chatMain
+          }
+        ]
+      },
+
+      {
+        path: '/friends',
+        component: Friends
+      },
+      {
+        path: '/collection',
+        component: Collection
       }
     ]
   },
-
   {
     path: '/friends',
     component: Friends,
@@ -67,11 +81,11 @@ router.beforeEach((to,from,next)=>{
 })
 
 
-export function resetRouter(){
-  const newRouter = createRouter({
-    history: createWebHistory(),
-    routes
-  })
-  router.matcher = newRouter.matcher
-}
+// export function resetRouter(){
+//   const newRouter = createRouter({
+//     history: createWebHistory(),
+//     routes
+//   })
+//   router.matcher = newRouter.matcher
+// }
 export default router

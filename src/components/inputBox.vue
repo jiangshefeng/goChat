@@ -1,15 +1,24 @@
 <template>
-  <div class="container">
-    <textarea></textarea>
+  <div class="container" @keyup.enter="sendInfo">
+    <textarea v-model="textarea"></textarea>
     <div class="send">
-      <el-button type="success">发送 </el-button>
+      <el-button type="success" @click="sendInfo">发送 </el-button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
+
 const textarea = ref('')
+const emit = defineEmits(['send'])
+const sendInfo = () => {
+  if (textarea.value === '') {
+    return
+  }
+  emit('send', textarea.value)
+  textarea.value = ''
+}
 </script>
 <style scoped>
 .container {

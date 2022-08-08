@@ -15,6 +15,7 @@ declare module '@vue/runtime-core' {
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
     InputBox: typeof import('./src/components/inputBox.vue')['default']
     MainLayout: typeof import('./src/components/mainLayout.vue')['default']
+    MyMessageBox: typeof import('./src/components/myMessageBox.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SearchBar: typeof import('./src/components/searchBar.vue')['default']
