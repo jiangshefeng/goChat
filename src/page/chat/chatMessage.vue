@@ -1,6 +1,6 @@
 <template>
   <ul>
-    <li v-for="item in message">
+    <li v-for="(item, index) in message" :key="item.time + index">
       <myMessageBox :info="item"> </myMessageBox>
     </li>
   </ul>
