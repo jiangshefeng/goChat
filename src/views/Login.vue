@@ -52,6 +52,7 @@ import axios from 'axios'
 import { h } from 'vue'
 import { ElMessage } from 'element-plus'
 import router from '../router/router'
+import resetRouter from '../router/router'
 import { url } from 'inspector'
 import { method } from 'lodash'
 export default {
@@ -82,8 +83,9 @@ export default {
         // })
         .then(function (response) {
           if (response.data.msg == 'success') {
+            sessionStorage.setItem('loginmsg','success')
             let path = '/chat'
-            router.push({ path: path })
+            router.push({ path: path, replace:true })
             return
           } else {
             ElMessage.error(response.data.msg)

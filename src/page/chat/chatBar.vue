@@ -34,6 +34,7 @@ const selected = ref(-1)
 </script>
 
 <template>
+
   <div class="container">
     <header>
       <searchBar></searchBar>
