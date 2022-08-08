@@ -52,7 +52,6 @@ router.beforeEach((to, from, next) => {
     } else {
       if (localStorage.getItem('user')) {
         next()
-        console.log(localStorage['s'])
       } else {
         next('/login')
         console.log('需要登录')

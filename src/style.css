@@ -80,3 +80,6 @@ body {
 .icon-shouye:before {
   content: '\e8b9';
 }
+ul li {
+  list-style-type: none;
+}

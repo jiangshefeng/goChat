@@ -1,4 +1,10 @@
-<template>收藏</template>
+<template></template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const arr = [
+  { name: 'sc', city: 'ls' },
+  { name: 'sc', city: 'ls' },
+  { name: 'sc', city: 'ls' }
+]
+</script>
 <style scoped></style>

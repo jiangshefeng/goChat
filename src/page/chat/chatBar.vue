@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import searchBar from '@/components/searchBar.vue'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import chatCard from './chatCard.vue'
 import { useRouter, useRoute } from 'vue-router'
 
 const chatMain = ref(null)
 const router = useRouter()
+const route = useRoute()
 
 let changeOverflowIn = () => {
   if (!chatMain.value) {
@@ -26,11 +27,14 @@ let items = [...Array(10)].map((item, index) => index)
 
 const goChat = (id: number) => {
   // console.log(router)
-  router.push({ path: `/chat/:${id}`, replace: true })
+  router.push({ path: `/chat/${id}`, replace: true })
+
   selected.value = id
 }
-
-const selected = ref(-1)
+onMounted(() => {
+  selected.value = +route.params.id as number
+})
+const selected = ref<null | number>(null)
 </script>
 
 <template>

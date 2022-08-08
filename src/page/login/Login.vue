@@ -83,7 +83,7 @@ export default {
         .then(function (response) {
           if (response.data.msg == 'success') {
             console.log(response.data)
-            localStorage.setItem('user', response.data.data)
+            localStorage.setItem('user', JSON.stringify(response.data.data))
             let path = '/chat'
             router.push({ path: path })
             return
