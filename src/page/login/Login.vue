@@ -41,6 +41,7 @@
           round
           >登录</el-button
         >
+        <el-button type="primary" @click="enroll" link>注册</el-button>
       </form>
     </div>
   </div>
