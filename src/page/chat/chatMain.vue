@@ -22,6 +22,7 @@ export type chatRecord = {
   text: string
   time: number
 }
+
 const chatDom = ref(null)
 const user = useUserStore()
 const route = useRoute()

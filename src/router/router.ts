@@ -11,8 +11,6 @@ import Collection from '../page/collection/collection.vue'
 import LayOut from '@/page/layout/layout.vue'
 import Login from '../page/login/Login.vue'
 export const routes: RouteRecordRaw[] = [
-  { path: '/', redirect: '/login', component:Login},
-  
   {
     path: '/',
     component: LayOut,
@@ -31,7 +29,13 @@ export const routes: RouteRecordRaw[] = [
 
       {
         path: '/friends',
-        component: Friends
+        component: Friends,
+        children: [
+          {
+            path: ':id',
+            component: friendsMain
+          }
+        ]
       },
       {
         path: '/collection',
@@ -40,19 +44,9 @@ export const routes: RouteRecordRaw[] = [
     ]
   },
   {
-    path: '/friends',
-    component: Friends,
-    children: [
-      {
-        path: ':id',
-        component: friendsMain
-      }
-    ]
+    path: '/login',
+    component: () => import('../page/login/Login.vue')
   },
-  {
-    path: '/collection',
-    component: Collection
-  }
 ]
 
 const router = createRouter({
@@ -69,7 +63,7 @@ router.beforeEach((to,from,next)=>{
     else{
       if(sessionStorage.loginmsg==="success"){
         next();
-        console.log(sessionStorage['loginmsg'])
+        // console.log(sessionStorage['loginmsg'])
       }
       else{
         next('/login');

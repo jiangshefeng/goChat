@@ -1,17 +1,37 @@
 <template>
   <div class="friendsMain">
-    名片
-    <eCard></eCard>
+    <div class="card">
+      <eCard></eCard>
+    </div>
   </div>
 </template>
 
-<script>
-import eCard from "../../components/eCard.vue"
-export default {
+<script setup lang="ts">
+import { watch } from 'vue'
+import { useRoute,  } from 'vue-router'
+import eCard from '../../components/eCard.vue'
 
-}
+// const route = useRoute()
+// console.log(route.params.id)
+// console.log(route)
+
+
 </script>
 
-<style>
-
+<style scoped>
+.friendsMain {
+  height: 100%;
+  width: 100%;
+  background-color: #f7f7f7;
+}
+.card {
+  padding: 10px;
+  height: 24em;
+  width: 12em;
+  position: fixed;
+  /* border: 1px solid var(--el-border-color-light); */
+  /* background-color: var(--el-border-color-light); */
+  left: 55%;
+  transform: translateX(-50%);
+}
 </style>
