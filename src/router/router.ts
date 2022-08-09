@@ -56,19 +56,15 @@ const router = createRouter({
 router.beforeEach((to,from,next)=>{
   if(to.path=='/login'){
     next()
-    console.log(sessionStorage.loginmsg)
-  }
-  else{
-    if(from.path=='/login') { next()}
-    else{
-      if(sessionStorage.loginmsg==="success"){
-        next();
-        // console.log(sessionStorage['loginmsg'])
-      }
-      else{
-        next('/login');
-        // console.log("需要登录")
-        ElMessage.error("需要登录")
+  } else {
+    if (from.path == '/login') {
+      next()
+    } else {
+      if (localStorage.getItem('user')) {
+        next()
+      } else {
+        next('/login')
+        console.log('需要登录')
       }
     }
   }

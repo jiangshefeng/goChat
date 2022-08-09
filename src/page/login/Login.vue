@@ -49,7 +49,7 @@
 <script lang="ts">
 import { reactive, ref, toRefs } from 'vue'
 import axios from 'axios'
-import { h } from 'vue'
+
 import { ElMessage } from 'element-plus'
 import router from '@/router/router'
 // import resetRouter from '../router/router'
@@ -62,7 +62,7 @@ export default {
       password: ''
     })
     const remember = ref('')
-
+    const userStore = useUserStore()
     const submit = async () => {
       if (user.account == '') {
         ElMessage.error('用户名不能为空')
