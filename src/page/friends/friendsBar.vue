@@ -43,10 +43,13 @@ let changeOverflowOut = () => {
   }
 }
 
-let items = [...Array(parseInt(sessionStorage.friendsNum))].map((item, index) => index)
-// let items=[1,5,86,68,32,]
-// console.log(items)
-// let items=JSON.parse(sessionStorage.friends).items
+
+// let items = [...Array(parseInt(sessionStorage.friendsNum))].map((item, index) => index)
+
+let items: any[]=[]
+for(var i in JSON.parse(localStorage.friends)){
+  items.push(JSON.parse(localStorage.friends)[i].friendId)
+}
 
 const router = useRouter()
 const friends = (id: number) => {

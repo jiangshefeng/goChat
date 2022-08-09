@@ -18,6 +18,7 @@ import { onMounted } from 'vue'
 import friendsBar from './friendsBar.vue'
 
 const list = async () => {
+
   await axios({
     url: 'http://10.6.4.216:10030/friend/friends/1233',
     method: 'get'
@@ -46,7 +47,7 @@ const list = async () => {
     })
   // console.log('58790')
 }
-onMounted(list)
+// onMounted(list)
 </script>
 <style scoped>
 .container {
