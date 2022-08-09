@@ -36,6 +36,16 @@ let message = get(props.id)
 if (message) {
   newestMsg.value = message[message.length - 1].msg
 }
+let localNewMsgs = get('newMessage')
+if (localNewMsgs) {
+  let tempArr = localNewMsgs.filter((v: any) => {
+    return v.sendId == props.id
+  })
+  if (tempArr.length > 0) {
+    isShow.value = true
+  }
+}
+
 const time = formatDate(Date.now())
 newMsg.$subscribe((mutation, state) => {
   let tempArr = state.messages.filter((v: any) => {
@@ -44,6 +54,8 @@ newMsg.$subscribe((mutation, state) => {
   // console.log(temp)
 
   if (tempArr.length > 0) {
+    console.log('new message')
+
     isShow.value = true
     newestMsg.value = tempArr[tempArr.length - 1].msg
   } else {
@@ -55,11 +67,11 @@ newMsg.$subscribe((mutation, state) => {
 .red {
   background-color: red;
   position: absolute;
-  width: 0.4em;
-  height: 0.4em;
+  width: 0.35em;
+  height: 0.35em;
   border-radius: 50%;
-  right: 4px;
-  top: -4px;
+  right: 0em;
+  top: -0.3em;
   margin: 0;
 }
 .chatCard {
