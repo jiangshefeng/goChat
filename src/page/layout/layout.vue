@@ -8,12 +8,13 @@
 import { reactive, ref } from 'vue'
 import { connect, disconnect } from '@/util/websocket'
 import { useRouter, useRoute } from 'vue-router'
-import { useMessageStore, useUserStore } from '@/store/store'
+import { useMessageStore, useLastestMsgStore } from '@/store/store'
 import { set, get } from '@/util/localStore'
 import { ElMessage } from 'element-plus'
 const selected = ref('')
 const router = useRouter()
 const route = useRoute()
+const lastestMsg = useLastestMsgStore()
 const status = reactive({
   squareUrl:
     'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
@@ -40,9 +41,10 @@ ws.onmessage = function (e) {
   }
 
   let data = JSON.parse(e.data)
-
+  lastestMsg.setNewestMsg(data)
   // console.log(data, '消息')
   let msg = get(data.sendId)
+
   if (msg) {
     msg.push(data)
     console.log(msg, '新消息')

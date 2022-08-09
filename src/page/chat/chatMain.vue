@@ -12,11 +12,14 @@
 import titleVue from '@/components/title.vue'
 import inputBoxVue from '@/components/inputBox.vue'
 import chatMessageVue from './chatMessage.vue'
-import { useUserStore, useMessageStore } from '@/store/store'
+import {
+  useUserStore,
+  useMessageStore,
+  useLastestMsgStore
+} from '@/store/store'
 import { useRoute } from 'vue-router'
 import { watch, ref, onMounted, nextTick } from 'vue'
 import { connect } from '@/util/websocket'
-import { info } from 'console'
 
 export type chatRecord = {
   sendId: string
@@ -24,7 +27,7 @@ export type chatRecord = {
   msg: string
   time: number
 }
-
+const lastestMsg = useLastestMsgStore()
 const chatDom = ref(null)
 const user = useUserStore()
 const route = useRoute()
@@ -40,7 +43,7 @@ const sendMessage = async (val: string) => {
   let ws = connect()
 
   ws.send(JSON.stringify(message))
-
+  lastestMsg.setNewestMsg(message)
   console.log(message)
 
   messages.value.push(message)

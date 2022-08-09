@@ -4,13 +4,19 @@ import { ref, onMounted, watch } from 'vue'
 import chatCard from './chatCard.vue'
 import { useRouter, useRoute } from 'vue-router'
 import http from '@/util/http/request'
-import { useUserStore, useFrindsStore, useMessageStore } from '@/store/store'
+import {
+  useUserStore,
+  useFrindsStore,
+  useMessageStore,
+  useLastestMsgStore
+} from '@/store/store'
 import { set } from '@/util/localStore'
 
 const chatMain = ref(null)
 const router = useRouter()
 const route = useRoute()
 const newMessage = useMessageStore()
+
 let changeOverflowIn = () => {
   if (!chatMain.value) {
     return
@@ -90,7 +96,7 @@ watch(
       <chatCard
         v-for="(item, index) in items"
         :key="item.id"
-        :id="item.friendId"
+        :item="item"
         @click="() => goChat(item.friendId)"
         :class="[selected === item.friendId ? 'selected' : '']"
       ></chatCard>

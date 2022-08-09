@@ -90,3 +90,16 @@ export const useMessageStore = defineStore('message', {
     }
   }
 })
+
+export const useLastestMsgStore = defineStore('lastest', {
+  state: () => {
+    return {
+      newestMsg: <any>null
+    }
+  },
+  actions: {
+    setNewestMsg(item: any) {
+      this.newestMsg = item
+    }
+  }
+})
