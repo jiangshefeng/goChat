@@ -77,7 +77,7 @@ watch(
 const router=useRouter()
 const chat = () => {
     // console.log(id.value)
-    router.push({ path: `/chat/${id.value}`, replace: true })
+    router.push({ path: `/chat/${account.value}`, replace: true })
 }
 </script>
 

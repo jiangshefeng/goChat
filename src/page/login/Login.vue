@@ -55,6 +55,7 @@ import router from '@/router/router'
 // import resetRouter from '../router/router'
 import { url } from 'inspector'
 import { method } from 'lodash'
+import { useUserStore } from '@/store/store'
 export default {
   setup() {
     const user = reactive({
@@ -83,14 +84,16 @@ export default {
         // })
         .then(function (response) {
           if (response.data.msg == 'success') {
-            sessionStorage.setItem('loginmsg','success')
+            console.log(response.data)
+            userStore.setUserInfo(response.data.data)
+            localStorage.setItem('user', JSON.stringify(response.data.data))
             let path = '/chat'
-            router.push({ path: path, replace:true })
+            router.push({ path: path })
             return
           } else {
             ElMessage.error(response.data.msg)
             user.password = ''
-            // console.log(response.data.msg)
+            console.log(response.data.msg)
           }
         })
     }
