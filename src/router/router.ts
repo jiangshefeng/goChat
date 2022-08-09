@@ -4,6 +4,7 @@ import chatMain from '@/page/chat/chatMain.vue'
 import Friends from '../page/friends/friends.vue'
 import Collection from '../page/collection/collection.vue'
 import LayOut from '@/page/layout/layout.vue'
+
 export const routes: RouteRecordRaw[] = [
   {
     path: '/',

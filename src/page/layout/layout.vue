@@ -6,10 +6,11 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { connect } from '@/util/websocket'
+import { connect, disconnect } from '@/util/websocket'
 import { useRouter, useRoute } from 'vue-router'
-import { useMessageStore } from '@/store/store'
+import { useMessageStore, useUserStore } from '@/store/store'
 import { set, get } from '@/util/localStore'
+import { ElMessage } from 'element-plus'
 const selected = ref('')
 const router = useRouter()
 const route = useRoute()
@@ -30,7 +31,16 @@ const goRouter = (item: any) => {
 const Messages = useMessageStore()
 let ws = connect()
 ws.onmessage = function (e) {
+  console.log(e.data)
+  if (e.data === '您被挤占下线') {
+    disconnect()
+    ElMessage.error(e.data)
+    router.push('/login')
+    return
+  }
+
   let data = JSON.parse(e.data)
+
   // console.log(data, '消息')
   let msg = get(data.sendId)
   if (msg) {
@@ -51,6 +61,13 @@ ws.onmessage = function (e) {
     set('newMessage', [data])
   }
 }
+// const user = useUserStore()
+
+// user.$subscribe((mutation, state) => {
+//   if (!state.isOnline) {
+//     router.push('login')
+//   }
+// })
 </script>
 
 <template>
