@@ -27,7 +27,7 @@ import eCard from '../../components/eCard.vue'
 .card {
   padding: 10px;
   height: 24em;
-  width: 12em;
+  width: 15em;
   position: fixed;
   /* border: 1px solid var(--el-border-color-light); */
   /* background-color: var(--el-border-color-light); */
