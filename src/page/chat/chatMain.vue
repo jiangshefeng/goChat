@@ -12,48 +12,45 @@
 import titleVue from '@/components/title.vue'
 import inputBoxVue from '@/components/inputBox.vue'
 import chatMessageVue from './chatMessage.vue'
-import { useUserStore } from '@/store/store'
+import { useUserStore, useMessageStore } from '@/store/store'
 import { useRoute } from 'vue-router'
 import { watch, ref, onMounted, nextTick } from 'vue'
+import { connect } from '@/util/websocket'
+import { info } from 'console'
 
 export type chatRecord = {
-  from: number
-  to: number
-  text: string
+  sendId: string
+  recvId: string
+  msg: string
   time: number
 }
+
 const chatDom = ref(null)
 const user = useUserStore()
 const route = useRoute()
 const messages = ref<chatRecord[]>([])
 const sendMessage = async (val: string) => {
-  const message = {
-    from: user.id,
-    to: +route.params.id,
-    text: val,
+  const message: any = {
+    sendId: user.id,
+    recvId: route.params.id,
+    msg: val,
     time: Date.now()
   }
   // 请求操作。。。。
+  let ws = connect()
+
+  ws.send(JSON.stringify(message))
+
   console.log(message)
 
   messages.value.push(message)
 
   setMessages(message)
+
   await nextTick()
-  chatDom.value.scrollTop = chatDom.value.scrollHeight
+  ;(chatDom as any).value.scrollTop = (chatDom as any).value.scrollHeight
 }
 
-// localStorage.setItem(
-//   '0',
-//   JSON.stringify([
-//     { from: -1, to: 0, text: '你好', time: Date.now() },
-//     { from: 0, to: -1, text: '你好', time: Date.now() },
-//     { from: -1, to: 0, text: '吃饭了吗', time: Date.now() },
-//     { from: 0, to: -1, text: '吃了', time: Date.now() },
-//     { from: 0, to: -1, text: '你呢', time: Date.now() },
-//     { from: 0, to: -1, text: '你吃的什么', time: Date.now() }
-//   ])
-// )
 // 合并本地的消息
 const setMessages = (msg: chatRecord) => {
   let x = localStorage.getItem(`${route.params.id}`)
@@ -78,20 +75,35 @@ const pullMessages = async () => {
   }
   // console.log(chatDom.value.scrollHeight)
   await nextTick()
-  chatDom.value.scrollTop = chatDom.value.scrollHeight
+  if (chatDom.value) {
+    ;(chatDom as any).value.scrollTop = (chatDom as any).value.scrollHeight
+  }
   // console.log(chatDom.value.scrollTop)
   // console.log(route.params.id)
 }
 onMounted(async () => {
   pullMessages()
+  console.log(messages.value)
 })
 
 watch(
   () => route.params.id,
-  () => {
-    pullMessages()
+  (val) => {
+    if (val === undefined) {
+    } else {
+      pullMessages()
+    }
   }
 )
+const newMessage = useMessageStore()
+
+newMessage.$subscribe((mutation, state) => {
+  console.log('更新了')
+
+  if (state.messages.length > 0) {
+    pullMessages()
+  }
+})
 </script>
 <style scoped>
 .chatContent {

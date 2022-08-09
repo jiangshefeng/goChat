@@ -49,11 +49,10 @@
 <script lang="ts">
 import { reactive, ref, toRefs } from 'vue'
 import axios from 'axios'
-import { h } from 'vue'
+
 import { ElMessage } from 'element-plus'
 import router from '../../router/router'
-import { url } from 'inspector'
-import { method } from 'lodash'
+import { useUserStore } from '@/store/store'
 export default {
   setup() {
     const user = reactive({
@@ -61,7 +60,7 @@ export default {
       password: ''
     })
     const remember = ref('')
-
+    const userStore = useUserStore()
     const submit = async () => {
       if (user.account == '') {
         ElMessage.error('用户名不能为空')
@@ -83,6 +82,7 @@ export default {
         .then(function (response) {
           if (response.data.msg == 'success') {
             console.log(response.data)
+            userStore.setUserInfo(response.data.data)
             localStorage.setItem('user', JSON.stringify(response.data.data))
             let path = '/chat'
             router.push({ path: path })

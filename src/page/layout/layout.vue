@@ -6,8 +6,10 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-
+import { connect } from '@/util/websocket'
 import { useRouter, useRoute } from 'vue-router'
+import { useMessageStore } from '@/store/store'
+import { set, get } from '@/util/localStore'
 const selected = ref('')
 const router = useRouter()
 const route = useRoute()
@@ -20,10 +22,34 @@ const items = [
   { path: '/friends', icon: 'shequ' },
   { path: '/collection', icon: 'shouye' }
 ]
-console.log(route)
+
 const goRouter = (item: any) => {
   router.push(item.path)
   selected.value = item.path
+}
+const Messages = useMessageStore()
+let ws = connect()
+ws.onmessage = function (e) {
+  let data = JSON.parse(e.data)
+  // console.log(data, '消息')
+  let msg = get(data.sendId)
+  if (msg) {
+    msg.push(data)
+    console.log(msg, '新消息')
+
+    set(data.sendId, msg)
+  } else {
+    set(data.sendId, [data])
+  }
+  Messages.setMessages(data)
+
+  let newMessage = get('newMessage')
+  if (newMessage) {
+    newMessage.push(data)
+    set('newMessage', newMessage)
+  } else {
+    set('newMessage', [data])
+  }
 }
 </script>
 
@@ -63,7 +89,11 @@ const goRouter = (item: any) => {
     </nav>
 
     <div class="container-main">
-      <router-view></router-view>
+      <router-view v-slot="{ Component }">
+        <keep-alive>
+          <component :is="Component" />
+        </keep-alive>
+      </router-view>
     </div>
     <div></div>
   </div>

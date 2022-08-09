@@ -5,7 +5,7 @@
         <el-avatar shape="square" fit="fill" :src="result?.headerPic" />
       </div>
       <div :class="result.self ? `message` : 'message-left'">
-        {{ info.text }}
+        {{ info.msg }}
       </div>
     </div>
     <div v-else>
@@ -21,8 +21,10 @@ import { onMounted, ref } from 'vue'
 const props = defineProps<{ info: chatRecord }>()
 const result = ref<any | null>(null)
 const userStore = useUserStore()
+// console.log(props.info)
 
-result.value = userStore.chooseUser(props.info.from)
+result.value = userStore.chooseUser(props.info.sendId)
+// console.log(result.value)
 </script>
 <style scoped>
 .header {
@@ -31,7 +33,30 @@ result.value = userStore.chooseUser(props.info.from)
   order: 2;
   margin-right: 40px;
 }
+.message::before {
+  position: absolute;
+  content: '';
+  width: 0;
+  height: 0;
+  border-top: 0.4rem solid transparent;
+  border-left: 0.4rem solid rgb(81, 226, 81);
+  border-bottom: 0.4rem solid transparent;
+  right: -0.3rem;
+  top: 0.2rem;
+}
+.message-left::before {
+  position: absolute;
+  content: '';
+  width: 0;
+  height: 0;
+  border-top: 0.4rem solid transparent;
+  border-bottom: 0.4rem solid transparent;
+  border-right: 0.4rem solid #fff;
+  left: -0.3rem;
+  top: 0.2rem;
+}
 .message {
+  position: relative;
   margin-top: 0px;
   font-size: 0.6rem;
   margin-right: 1em;
@@ -53,6 +78,7 @@ result.value = userStore.chooseUser(props.info.from)
   width: 40px;
 }
 .message-left {
+  position: relative;
   margin-top: 0px;
   font-size: 0.6rem;
   margin-left: 1em;

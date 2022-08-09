@@ -10,6 +10,7 @@
 import myMessageBox from '@/components/myMessageBox.vue'
 import { chatRecord } from './chatMain.vue'
 const props = defineProps<{ message: chatRecord[] }>()
+// console.log(props.message, '消息')
 </script>
 <style scoped>
 ul li {
