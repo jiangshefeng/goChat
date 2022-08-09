@@ -51,7 +51,10 @@ import { reactive, ref, toRefs } from 'vue'
 import axios from 'axios'
 import { connect } from '@/util/webSocket'
 import { ElMessage } from 'element-plus'
-import router from '../../router/router'
+import router from '@/router/router'
+// import resetRouter from '../router/router'
+import { url } from 'inspector'
+import { method } from 'lodash'
 import { useUserStore } from '@/store/store'
 export default {
   setup() {

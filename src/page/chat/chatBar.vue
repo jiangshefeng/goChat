@@ -66,9 +66,11 @@ const selected = ref<null | string>(null)
 watch(
   () => route.path,
   (val, oldV) => {
-    console.log(val)
-    if (val.includes('/chat')) {
+    console.log(oldV)
+    if (val.includes('/chat') && !oldV.includes('friends/')) {
       router.push({ path: `/chat/${selected.value}`, replace: true })
+    } else if (oldV.includes('friends/')) {
+      selected.value = route.params.id as string
     }
   }
 )

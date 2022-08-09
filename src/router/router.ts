@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Chat from '../page/chat/chat.vue'
+
 import chatMain from '@/page/chat/chatMain.vue'
 import Friends from '../page/friends/friends.vue'
+import friendsMain from '@/page/friends/friendsMain.vue'
 import Collection from '../page/collection/collection.vue'
 import LayOut from '@/page/layout/layout.vue'
-
 export const routes: RouteRecordRaw[] = [
   {
     path: '/',
@@ -24,7 +25,13 @@ export const routes: RouteRecordRaw[] = [
 
       {
         path: '/friends',
-        component: Friends
+        component: Friends,
+        children: [
+          {
+            path: ':id',
+            component: friendsMain
+          }
+        ]
       },
       {
         path: '/collection',
@@ -42,7 +49,6 @@ const router = createRouter({
   history: createWebHistory(),
   routes
 })
-
 router.beforeEach((to, from, next) => {
   if (to.path == '/login') {
     next()
@@ -59,4 +65,12 @@ router.beforeEach((to, from, next) => {
     }
   }
 })
+
+// export function resetRouter(){
+//   const newRouter = createRouter({
+//     history: createWebHistory(),
+//     routes
+//   })
+//   router.matcher = newRouter.matcher
+// }
 export default router
